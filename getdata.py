@@ -23,9 +23,9 @@ def readSensor():
     humi = round(humi, 1)
     pres = round(pres, 1)
     if int(temp) >= 20:#If the temperature is higher or equal to 20 
-        sense.show_message("Temp:"+str{temp)+"c", scroll_speed = 0.2, text_colour=[255, 0, 0])#Red
+        sense.show_message("Temp:"+str(temp)+"c", scroll_speed = 0.2, text_colour=[255, 0, 0])#Red
     else:
-        sense.show_message("Temp:"+str{temp)+"c", scroll_speed = 0.2, text_colour=[0, 0, 255])#Blue
+        sense.show_message("Temp:"+str(temp)+"c", scroll_speed = 0.2, text_colour=[0, 0, 255])#Blue
                                        
     sql = "INSERT INTO sense_data(temperature, humidity, pressure, dt) VALUES (%s, %s, %s, %s)"#SQL statement
     val = (temp, humi, pres, dt)#Values for SQL
