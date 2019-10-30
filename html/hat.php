@@ -2,75 +2,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="style.css"/>
 <meta charset="utf-8" />
 <title>Luke RPI Data</title>
-<style>
-		table {
-			border-collapse: collapse;
-			width: 100%;
-			color: #588c7e;
-			font-family: monospace;
-			font-size: 25px;
-			text-align: left;
-			}
-		th {
-			background-color: #588c7e;
-			color: white;
-			}
-		tr:nth-child(even) {background-color: #f2f2f2}
-		* {
-		  box-sizing: border-box;
-		}
-		
-		body {
-		  font-family: Arial, Helvetica, sans-serif;
-		}
-		
-		/* Style the header */
-		header {
-		  background-color: #666;
-		  padding: 30px;
-		  text-align: center;
-		  font-size: 35px;
-		  color: white;
-		}
-		
-		/* Create two columns/boxes that floats next to each other */
-		nav {
-		  float: left;
-		  width: 30%;
-		  background: #ccc;
-		  padding: 20px;
-		}
-		
-		/* Style the list inside the menu */
-		nav ul {
-		  list-style-type: none;
-		  padding: 0;
-		}
-		
-		article {
-		  float: left;
-		  padding: 20px;
-		  width: 70%;
-		  background-color: #f1f1f1;
-		}
-		
-		/* Clear floats after the columns */
-		section:after {
-		  content: "";
-		  display: table;
-		  clear: both;
-		}
-		
-		/* Style the footer */
-		footer {
-		  background-color: #777;
-		  padding: 10px;
-		  text-align: center;
-		  color: white;
-		}
-	</style>
 </head>
 <body>
 
@@ -85,14 +19,22 @@
 		</nav>
 		<h1>Sense Hat</h1>
 		<?php
-			if ($_GET){
-			$temp = exec('sudo python3 /home/pi/sendMeg.py '.$_GET[data]);
+			if (isset($_GET['temp'])){#get the current temperature
+			$temp1 = exec('sudo python3 /home/pi/gettemp.py');
 			}
+			elseif (isset($_GET['data'])){#send a message
+			$temp2 = exec('sudo python3 /home/pi/sendMeg.py '.$_GET[data]);
+			}			
+
 		?>
 		<FORM NAME ="sense" Method="GET">
-		Send: <input type="text" name="data"/>
-		<button name ="sens">Send</button><br /><br />
-		Temperature:<?php echo $temp;?> &deg;C<br>
+		Send a Message: <input type="text" name="data" />
+		<button name ="send">Send</button><br /><br />
+		</form>
+		<br>
+		<FORM NAME ="getTemp" method="GET">
+		<button name="temp">Get Temp</button><br /><br />
+		Temperature:<?php echo $temp1;?> &deg;C<br> 
 		</form>
 	<article>
 	
